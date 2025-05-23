@@ -26,6 +26,7 @@ El **Articulo** tienen como atributos
 | marca       |   MarcaModel   |
 | proveedor   | ProveedorModel |
 
+
 **Categorias** y **Marca**
 
 | Atributo    | Tipo |
