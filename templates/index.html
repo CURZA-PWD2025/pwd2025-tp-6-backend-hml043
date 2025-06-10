@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flask - TP5 - PWD 2025</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="base.css") }}">
+  </head>
+  <body>
+     <nav>
+        <a href="{{ url_for('home') }}">Inicio</a>
+        <a href="{{ url_for('listar_productos') }}">Productos</a>
+        <a href="{{ url_for('listar_categorias') }}">Categorias</a>
+    </nav>
+    <hr>
+    <div class="div_main">
+    <h1>Bienvenid@s a PWD 2025</h1>
+    <h2>Esta es la primera aplicacion utilizando el framework Flask</h2>    
+    <footer class="footer_container">
+      <p>Mauro Lorente - Cursando 2do año de Desarrollo Web</p>
+      <p>Universidad Nacional del Comahue</p>      
+    </footer>
+    </div>
+  </body>
+</html>
