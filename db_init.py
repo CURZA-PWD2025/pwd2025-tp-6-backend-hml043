@@ -154,7 +154,7 @@ SEEDS['ARTICULOS_CATEGORIAS'] = (
 def create_database(cursor):
     try:
         cursor.execute(
-            f"CREATE DATABASE {DB_NAME} DEFAULT CHARACTER SET 'utf8'", )
+            f"CREATE DATABASE {DB_NAME} DEFAULT CHARACTER SET 'UTF8MB4'", ) #utf8 antes
     except Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with your user name or password")
@@ -197,18 +197,21 @@ def seeds_tables(seed, cursor):
             print("OK")
 
 
-cxn = mysql.connector.connect(**DB_CONFIG)
-cursor = cxn.cursor()
-cursor.close()
-cxn.close()
+cnx = mysql.connector.connect(**DB_CONFIG)
+print(cnx)
+cursor = cnx.cursor()
+print(cursor)
+#cursor.close()
+#cnx.close()
 
 create_database(cursor)
+
 CONF_DB = DB_CONFIG.copy()
 CONF_DB['database'] = DB_NAME
-cxn = mysql.connector.connect(**CONF_DB)
-cursor = cxn.cursor()
+cnx = mysql.connector.connect(**CONF_DB)
+cursor = cnx.cursor()
 create_tables(TABLES, cursor)
 seeds_tables(SEEDS, cursor)
-cxn.commit()
+cnx.commit()
 cursor.close()
-cxn.close()
+cnx.close()

@@ -6,6 +6,9 @@ bp_articulo = Blueprint("bp_articulo", __name__, url_prefix="articulos")
 @bp_articulo.route("/", methods=["GET"])
 def get_all_articulos():
     data = Articulo.get_all()
+    #print('debug...')
+    #print(data)
+    #print('debug...')
     try:
         if data:
             return jsonify(data), 200
@@ -16,9 +19,9 @@ def get_all_articulos():
 
 @bp_articulo.route("/<int:id>", methods=["GET"])
 def get_one_articulo(id):
-    data = Articulo.get_one(id)
+    data = Articulo.get_one(id)    
     try:
-        if data:
+        if data:            
             return jsonify(data), 200
         else:
             return jsonify({"message": "Articulo: no se encontraron datos"}), 404

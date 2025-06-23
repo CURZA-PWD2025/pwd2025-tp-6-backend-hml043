@@ -12,7 +12,7 @@ class CategoriaController:
 
     @staticmethod
     def create(data: dict):
-        categoria = Categoria(descripcion=data['descripcion'])
+        categoria = Categoria(nombre=data['nombre'])
         return categoria.create()
 
     @staticmethod

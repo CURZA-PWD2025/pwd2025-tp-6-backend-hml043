@@ -1,4 +1,4 @@
-from flask import Blueprint, Request, jsonify
+from flask import Blueprint, request, jsonify
 from .proveedor_controller import ProveedorController as Proveedor
 
 bp_proveedor = Blueprint("bp_proveedor", __name__, url_prefix="proveedores")

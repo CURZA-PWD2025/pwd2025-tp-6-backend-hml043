@@ -1,4 +1,4 @@
-from flask import Blueprint, Request, jsonify
+from flask import Blueprint, request, jsonify
 from .marca_controller import MarcaController as Marca
 
 bp_marca = Blueprint("bp_marca", __name__, url_prefix="marcas")

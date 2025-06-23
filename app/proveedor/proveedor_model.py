@@ -30,27 +30,27 @@ class ProveedorModel:
 
     @staticmethod
     def get_all() -> list[dict]:
-        sql = "SELECT * FROM proveedores"
+        sql = "SELECT * FROM PROVEEDORES"
         result = DB.read(sql)
         return result
 
     def get_one(self) -> dict:
-        sql = "SELECT * FROM proveedores WHERE id=%s"
+        sql = "SELECT * FROM PROVEEDORES WHERE id=%s"
         params = (self.id,)
         result = DB.read(sql, params)
         return result
 
     def create(self) -> int | bool:
-        sql = "INSERT INTO proveedores (nombre, telefono, direccion, email) VALUES (%s, %s, %s, %s)"
+        sql = "INSERT INTO PROVEEDORES (nombre, telefono, direccion, email) VALUES (%s, %s, %s, %s)"
         params = (self.nombre, self.telefono, self.direccion, self.email)
         return DB.write(sql, params)
 
     def update(self) -> int | bool:
-        sql = "UPDATE proveedores SET nombre=%s, telefono=%s, direccion=%s, email=%s WHERE id=%s"
+        sql = "UPDATE PROVEEDORES SET nombre=%s, telefono=%s, direccion=%s, email=%s WHERE id=%s"
         params = params = (self.nombre, self.telefono, self.direccion, self.email, self.id)
         return DB.write(sql, params)
 
     def delete(self) -> int | bool:
-        sql = "DELETE FROM proveedores WHERE id=%s"
+        sql = "DELETE FROM PROVEEDORES WHERE id=%s"
         params = (self.id,)
         return DB.write(sql, params)

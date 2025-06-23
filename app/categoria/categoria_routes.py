@@ -1,4 +1,4 @@
-from flask import Blueprint, Request, jsonify
+from flask import Blueprint, request, jsonify
 from .categoria_controller import CategoriaController
 
 bp_categoria = Blueprint("bp_categoria", __name__, url_prefix="categorias")
