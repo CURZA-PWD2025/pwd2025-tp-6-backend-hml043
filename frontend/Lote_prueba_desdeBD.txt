@@ -1,0 +1,544 @@
+----------------------------------- Articulos
+[
+  {
+    "categorias": [
+      {
+        "id": 1,
+        "nombre": "Notebooks y Laptops"
+      }
+    ],
+    "descripcion": "Notebook HP Pavilion 15.6\" i5 8GB RAM 512GB SSD",
+    "id": 1,
+    "marca": [
+      {
+        "id": 1,
+        "nombre": "HP"
+      }
+    ],
+    "marca_id": 1,
+    "precio": "450000.00",
+    "proveedor": [
+      {
+        "direccion": "Av. C\u00f3rdoba 1234, CABA",
+        "email": "contacto@techsolutions.com.ar",
+        "id": 1,
+        "nombre": "Tech Solutions SRL",
+        "telefono": "1144556677"
+      }
+    ],
+    "proveedor_id": 1,
+    "stock": 12
+  },
+  {
+    "categorias": [
+      {
+        "id": 2,
+        "nombre": "Computadoras de Escritorio"
+      }
+    ],
+    "descripcion": "PC de Escritorio Dell OptiPlex i7 16GB RAM 1TB HDD",
+    "id": 2,
+    "marca": [
+      {
+        "id": 2,
+        "nombre": "Dell"
+      }
+    ],
+    "marca_id": 2,
+    "precio": "520000.00",
+    "proveedor": [
+      {
+        "direccion": "Calle Falsa 456, Rosario",
+        "email": "ventas@informatotal.com",
+        "id": 2,
+        "nombre": "Informatica Total",
+        "telefono": "1167891234"
+      }
+    ],
+    "proveedor_id": 2,
+    "stock": 7
+  },
+  {
+    "categorias": [
+      {
+        "id": 3,
+        "nombre": "Tablets"
+      }
+    ],
+    "descripcion": "Tablet Lenovo M10 HD 10.1\" 32GB WiFi",
+    "id": 3,
+    "marca": [
+      {
+        "id": 3,
+        "nombre": "Lenovo"
+      }
+    ],
+    "marca_id": 3,
+    "precio": "190000.00",
+    "proveedor": [
+      {
+        "direccion": "Av. San Mart\u00edn 789, Mendoza",
+        "email": "info@redesycia.com",
+        "id": 3,
+        "nombre": "Redes & C\u00eda",
+        "telefono": "1133445566"
+      }
+    ],
+    "proveedor_id": 3,
+    "stock": 25
+  },
+  {
+    "categorias": [
+      {
+        "id": 4,
+        "nombre": "Monitores"
+      }
+    ],
+    "descripcion": "Monitor Asus ProArt 27\" 4K UHD IPS",
+    "id": 4,
+    "marca": [
+      {
+        "id": 4,
+        "nombre": "Asus"
+      }
+    ],
+    "marca_id": 4,
+    "precio": "330000.00",
+    "proveedor": [
+      {
+        "direccion": "Mitre 321, La Plata",
+        "email": "soporte@pcexpress.com.ar",
+        "id": 4,
+        "nombre": "PC Express",
+        "telefono": "1122334455"
+      }
+    ],
+    "proveedor_id": 4,
+    "stock": 9
+  },
+  {
+    "categorias": [
+      {
+        "id": 5,
+        "nombre": "Impresoras"
+      }
+    ],
+    "descripcion": "Impresora L\u00e1ser HP LaserJet Pro M404dn",
+    "id": 5,
+    "marca": [
+      {
+        "id": 1,
+        "nombre": "HP"
+      }
+    ],
+    "marca_id": 1,
+    "precio": "240000.00",
+    "proveedor": [
+      {
+        "direccion": "Belgrano 987, C\u00f3rdoba",
+        "email": "contacto@datasoft.com.ar",
+        "id": 5,
+        "nombre": "DataSoft Argentina",
+        "telefono": "1198765432"
+      }
+    ],
+    "proveedor_id": 5,
+    "stock": 6
+  },
+  {
+    "categorias": [
+      {
+        "id": 6,
+        "nombre": "Perif\u00e9ricos"
+      }
+    ],
+    "descripcion": "Mouse Logitech M185 Inal\u00e1mbrico",
+    "id": 6,
+    "marca": [
+      {
+        "id": 6,
+        "nombre": "Apple"
+      }
+    ],
+    "marca_id": 6,
+    "precio": "8900.00",
+    "proveedor": [
+      {
+        "direccion": "Av. Rivadavia 4321, CABA",
+        "email": "ventas@compumarket.com",
+        "id": 6,
+        "nombre": "CompuMarket",
+        "telefono": "1177889900"
+      }
+    ],
+    "proveedor_id": 6,
+    "stock": 60
+  },
+  {
+    "categorias": [
+      {
+        "id": 7,
+        "nombre": "Redes y Conectividad"
+      }
+    ],
+    "descripcion": "Router TP-Link Archer C6 AC1200",
+    "id": 7,
+    "marca": [
+      {
+        "id": 7,
+        "nombre": "Samsung"
+      }
+    ],
+    "marca_id": 7,
+    "precio": "21000.00",
+    "proveedor": [
+      {
+        "direccion": "Urquiza 1111, Mar del Plata",
+        "email": "info@technoworld.com.ar",
+        "id": 7,
+        "nombre": "TechnoWorld",
+        "telefono": "1100112233"
+      }
+    ],
+    "proveedor_id": 7,
+    "stock": 35
+  },
+  {
+    "categorias": [
+      {
+        "id": 8,
+        "nombre": "Almacenamiento"
+      }
+    ],
+    "descripcion": "Disco Externo Seagate 2TB USB 3.0",
+    "id": 8,
+    "marca": [
+      {
+        "id": 8,
+        "nombre": "LG"
+      }
+    ],
+    "marca_id": 8,
+    "precio": "45000.00",
+    "proveedor": [
+      {
+        "direccion": "Alsina 654, Bah\u00eda Blanca",
+        "email": "clientes@hardnet.com",
+        "id": 8,
+        "nombre": "HardNet SRL",
+        "telefono": "1188997766"
+      }
+    ],
+    "proveedor_id": 8,
+    "stock": 20
+  },
+  {
+    "categorias": [
+      {
+        "id": 9,
+        "nombre": "Software"
+      }
+    ],
+    "descripcion": "Microsoft Office 365 Personal - Licencia 1 a\u00f1o",
+    "id": 9,
+    "marca": [
+      {
+        "id": 9,
+        "nombre": "Sony"
+      }
+    ],
+    "marca_id": 9,
+    "precio": "18000.00",
+    "proveedor": [
+      {
+        "direccion": "Av. Colon 2020, Salta",
+        "email": "bitware@correo.com",
+        "id": 9,
+        "nombre": "BitWare",
+        "telefono": "1155667788"
+      }
+    ],
+    "proveedor_id": 9,
+    "stock": 15
+  },
+  {
+    "categorias": [
+      {
+        "id": 10,
+        "nombre": "Componentes"
+      }
+    ],
+    "descripcion": "Memoria RAM Corsair Vengeance 8GB DDR4 3200MHz",
+    "id": 10,
+    "marca": [
+      {
+        "id": 10,
+        "nombre": "Toshiba"
+      }
+    ],
+    "marca_id": 10,
+    "precio": "32000.00",
+    "proveedor": [
+      {
+        "direccion": "San Juan 3030, Tucum\u00e1n",
+        "email": "digital@dp.com.ar",
+        "id": 10,
+        "nombre": "Digital Point",
+        "telefono": "1133221100"
+      }
+    ],
+    "proveedor_id": 10,
+    "stock": 30
+  },
+  {
+    "categorias": [],
+    "descripcion": "Dell AIO 8gb SSD 256gb",
+    "id": 11,
+    "marca": [
+      {
+        "id": 2,
+        "nombre": "Dell"
+      }
+    ],
+    "marca_id": 2,
+    "precio": "1350000.10",
+    "proveedor": [
+      {
+        "direccion": "Av. San Mart\u00edn 789, Mendoza",
+        "email": "info@redesycia.com",
+        "id": 3,
+        "nombre": "Redes & C\u00eda",
+        "telefono": "1133445566"
+      }
+    ],
+    "proveedor_id": 3,
+    "stock": 13
+  },
+  {
+    "categorias": [
+      {
+        "id": 3,
+        "nombre": "Tablets"
+      },
+      {
+        "id": 1,
+        "nombre": "Notebooks y Laptops"
+      }
+    ],
+    "descripcion": "Dell AIO 16gb SSD 512gb",
+    "id": 12,
+    "marca": [
+      {
+        "id": 3,
+        "nombre": "Lenovo"
+      }
+    ],
+    "marca_id": 3,
+    "precio": "1750000.30",
+    "proveedor": [
+      {
+        "direccion": "Mitre 321, La Plata",
+        "email": "soporte@pcexpress.com.ar",
+        "id": 4,
+        "nombre": "PC Express",
+        "telefono": "1122334455"
+      }
+    ],
+    "proveedor_id": 4,
+    "stock": 23
+  },
+  {
+    "categorias": [],
+    "descripcion": "Dell AIO 8gb SSD 256gb",
+    "id": 13,
+    "marca": [
+      {
+        "id": 2,
+        "nombre": "Dell"
+      }
+    ],
+    "marca_id": 2,
+    "precio": "1350000.10",
+    "proveedor": [
+      {
+        "direccion": "Av. San Mart\u00edn 789, Mendoza",
+        "email": "info@redesycia.com",
+        "id": 3,
+        "nombre": "Redes & C\u00eda",
+        "telefono": "1133445566"
+      }
+    ],
+    "proveedor_id": 3,
+    "stock": 13
+  }
+]
+
+----------------------------------- Proveedores
+[
+  {
+    "direccion": "Av. C\u00f3rdoba 1234, CABA",
+    "email": "contacto@techsolutions.com.ar",
+    "id": 1,
+    "nombre": "Tech Solutions SRL",
+    "telefono": "1144556677"
+  },
+  {
+    "direccion": "Calle Falsa 456, Rosario",
+    "email": "ventas@informatotal.com",
+    "id": 2,
+    "nombre": "Informatica Total",
+    "telefono": "1167891234"
+  },
+  {
+    "direccion": "Av. San Mart\u00edn 789, Mendoza",
+    "email": "info@redesycia.com",
+    "id": 3,
+    "nombre": "Redes & C\u00eda",
+    "telefono": "1133445566"
+  },
+  {
+    "direccion": "Mitre 321, La Plata",
+    "email": "soporte@pcexpress.com.ar",
+    "id": 4,
+    "nombre": "PC Express",
+    "telefono": "1122334455"
+  },
+  {
+    "direccion": "Belgrano 987, C\u00f3rdoba",
+    "email": "contacto@datasoft.com.ar",
+    "id": 5,
+    "nombre": "DataSoft Argentina",
+    "telefono": "1198765432"
+  },
+  {
+    "direccion": "Av. Rivadavia 4321, CABA",
+    "email": "ventas@compumarket.com",
+    "id": 6,
+    "nombre": "CompuMarket",
+    "telefono": "1177889900"
+  },
+  {
+    "direccion": "Urquiza 1111, Mar del Plata",
+    "email": "info@technoworld.com.ar",
+    "id": 7,
+    "nombre": "TechnoWorld",
+    "telefono": "1100112233"
+  },
+  {
+    "direccion": "Alsina 654, Bah\u00eda Blanca",
+    "email": "clientes@hardnet.com",
+    "id": 8,
+    "nombre": "HardNet SRL",
+    "telefono": "1188997766"
+  },
+  {
+    "direccion": "Av. Colon 2020, Salta",
+    "email": "bitware@correo.com",
+    "id": 9,
+    "nombre": "BitWare",
+    "telefono": "1155667788"
+  },
+  {
+    "direccion": "San Juan 3030, Tucum\u00e1n",
+    "email": "digital@dp.com.ar",
+    "id": 10,
+    "nombre": "Digital Point",
+    "telefono": "1133221100"
+  }
+]
+----------------------------------- Categorias
+[
+  {
+    "id": 1,
+    "nombre": "Notebooks y Laptops"
+  },
+  {
+    "id": 2,
+    "nombre": "Computadoras de Escritorio"
+  },
+  {
+    "id": 3,
+    "nombre": "Tablets"
+  },
+  {
+    "id": 4,
+    "nombre": "Monitores"
+  },
+  {
+    "id": 5,
+    "nombre": "Impresoras"
+  },
+  {
+    "id": 6,
+    "nombre": "Perif\u00e9ricos"
+  },
+  {
+    "id": 7,
+    "nombre": "Redes y Conectividad"
+  },
+  {
+    "id": 8,
+    "nombre": "Almacenamiento"
+  },
+  {
+    "id": 9,
+    "nombre": "Software"
+  },
+  {
+    "id": 10,
+    "nombre": "Componentes"
+  }
+]
+----------------------------------- Marcas
+[
+  {
+    "id": 1,
+    "nombre": "HP"
+  },
+  {
+    "id": 2,
+    "nombre": "Dell"
+  },
+  {
+    "id": 3,
+    "nombre": "Lenovo"
+  },
+  {
+    "id": 4,
+    "nombre": "Asus"
+  },
+  {
+    "id": 5,
+    "nombre": "Acer"
+  },
+  {
+    "id": 6,
+    "nombre": "Apple"
+  },
+  {
+    "id": 7,
+    "nombre": "Samsung"
+  },
+  {
+    "id": 8,
+    "nombre": "LG"
+  },
+  {
+    "id": 9,
+    "nombre": "Sony"
+  },
+  {
+    "id": 10,
+    "nombre": "Toshiba"
+  },
+  {
+    "id": 12,
+    "nombre": "Huawei"
+  },
+  {
+    "id": 13,
+    "nombre": "IBM"
+  }
+]
+
+

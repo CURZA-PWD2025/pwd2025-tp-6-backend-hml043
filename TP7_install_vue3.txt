@@ -1,0 +1,85 @@
+> mlorente@mlorente-ubu:~/Documentos/UnCo/dw_2024/2a_1c_pwd
+> git clone git@github.com:CURZA-PWD2025/pwd2025-tp-6-backend-hml043.git tp_7
+
+npm notice New major version of npm available! 10.8.2 -> 11.4.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.4.2
+npm notice To update run: npm install -g npm@11.4.2
+npm notice
+
+> mlorente@mlorente-ubu:~/Documentos/UnCo/dw_2024/2a_1c_pwd/tp_7/frontend
+> npm install -g npm@11.4.2
+
+> mlorente@mlorente-ubu:~/Documentos/UnCo/dw_2024/2a_1c_pwd/tp_7
+> npm create vue@latest
+
+> npx
+> "create-vue"
+
+┌  Vue.js - The Progressive JavaScript Framework
+│
+◇  Project name (target directory):
+│  frontend
+│
+◇  Select features to include in your project: (↑/↓ to navigate, space to select, a to toggle all, enter to confirm)
+│  TypeScript, Router (SPA development), Pinia (state management), ESLint (error prevention), Prettier (code formatting)
+│
+◇  Install Oxlint for faster linting? (experimental)
+│  No
+
+Scaffolding project in /home/mlorente/Documentos/UnCo/dw_2024/2a_1c_pwd/tp_7/frontend...
+│
+└  Done. Now run:
+
+   cd frontend
+   npm install
+   npm run format
+   npm run dev
+
+| Optional: Initialize Git in your project directory with:
+   
+   git init && git add -A && git commit -m "initial commit"
+
+mlorente@mlorente-ubu:~/Documentos/UnCo/dw_2024/2a_1c_pwd/tp_7$ 
+
+> cd mlorente@mlorente-ubu:~/Documentos/UnCo/dw_2024/2a_1c_pwd/tp_7/frontend
+> npm install
+
+added 362 packages, and audited 363 packages in 1m
+
+92 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+> cd mlorente@mlorente-ubu:~/Documentos/UnCo/dw_2024/2a_1c_pwd/tp_7/frontend
+> npm run dev
+
+> frontend@0.0.0 dev
+> vite
+
+
+  VITE v6.3.5  ready in 769 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  Vue DevTools: Open http://localhost:5173/__devtools__/ as a separate window
+  ➜  Vue DevTools: Press Alt(⌥)+Shift(⇧)+D in App to toggle the Vue DevTools
+  ➜  press h + enter to show help
+^C
+
+> cd mlorente@mlorente-ubu:~/Documentos/UnCo/dw_2024/2a_1c_pwd/tp_7/frontend
+
+> npm run format
+> npm run lint
+> npm install axios
+> npm run dev
+> npm install --save-dev @iconify/vue
+
+> git status
+> git branch
+> git add .
+> git commit -m "Primer commit tp7 - c/captura pantallas - prueba inicial sin Back"
+> git push origin main
+
+
+
