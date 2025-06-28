@@ -1,0 +1,29 @@
+.div_main {
+	text-align: center;
+	margin: 100px;
+}
+.footer_container {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #d64161;  /*#fcaf62; naranja*/
+    padding: 10px;
+    color: #ffffff;
+    margin-top: 30px;
+}
+nav a {
+    color: #d64161;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-left: 50px;
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+a:hover {
+  color: whitesmoke;
+  background: #d64161;
+}        

@@ -1,0 +1,69 @@
+localhost:5000/api/articulos
+
+prueba udpdate
+localhost:5000/api/articulos/14
+{
+    "categorias": [1,3],
+    "descripcion": "Dell AIO 16gb SSD 512gb",
+    "id": 14,
+    "marca_id": 3,
+    "precio": "1750000.10",
+    "proveedor_id": 4,
+    "stock": 23
+}
+
+
+{
+    "id": 3,
+    "nombre": "Lenovo"
+}
+
+{
+        "direccion": "Peru 1234",
+        "email": "info@perudata.com.ar",
+        "id": 5,
+        "nombre": "Peru Dat SA",
+        "telefono": "987601234"
+}
+
+{
+    "categorias": [
+        {
+            "id": 3,
+            "nombre": "Tablets"
+        }
+    ],
+    "descripcion": "Dell AIO 8gb SSD 256gb",
+    "id": 3,
+    "marca": [
+        {
+            "id": 3,
+            "nombre": "Lenovo"
+        }
+    ],
+    "marca_id": 3,
+    "precio": "190000.00",
+    "proveedor": [
+        {
+            "direccion": "Av. San Martín 789, Mendoza",
+            "email": "info@redesycia.com",
+            "id": 3,
+            "nombre": "Redes & Cía",
+            "telefono": "1133445566"
+        }
+    ],
+    "proveedor_id": 3,
+    "stock": 25
+}
+
+#  prueba alta
+{
+    "categorias": [1,2],
+    "descripcion": "Dell AIO 8gb SSD 256gb",
+    "id": 3,
+    "marca_id": 2,
+    "precio": "1350000.10",
+    "proveedor_id": 3,
+    "stock": 13
+}
+
