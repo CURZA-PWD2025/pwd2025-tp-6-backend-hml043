@@ -71,6 +71,8 @@ class DB:
         with cnx.cursor() as cursor:
             try:
                 cursor.execute(sql, params)
+                print(sql)
+                print(params)
                 cnx.commit()
                 if cursor.lastrowid:
                     return cursor.lastrowid

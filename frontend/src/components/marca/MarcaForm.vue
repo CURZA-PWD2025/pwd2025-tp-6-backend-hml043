@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="onSubmit" class="form">
-    <h2>{{ isEdit.value ? 'editar Marca' : 'crear Marca' }}</h2>
+    <h2>{{ store.esEditar ? 'editar Marca' : 'crear Marca' }}</h2>
 
     <label for="nombre">Nombre:</label><br>
-    <input v-model="item.nombre" placeholder="Ingrese un nombre" type="text" class="input" required autofocus/>
+    <input v-model="store.item.nombre" placeholder="Ingrese un nombre" type="text" class="input" required autofocus/>
 
     <button type="submit" class="boton">Confirmar</button>
     <button type="reset" class="boton">Limpiar</button>
@@ -14,23 +14,40 @@
 <script setup lang="ts">
 import { ref, computed }  from 'vue'
 import { storeToRefs }    from 'pinia'
-import { useMarcaStore }  from '@/stores/marcaStore'
 import { useRouter }      from 'vue-router'
+import { useMarcaStore }  from '@/stores/marcaStore'
 
 const router  = useRouter();
-const isEdit  = ref(false)
+const store   = useMarcaStore()
+const { items, item, esEditar, idEditar } = storeToRefs(store)
+const { addItem, updItem }                = store
 
-/****** DEBUG ******/
-const item    = {id: 1, nombre: 'Marca 1'}
-/****** DEBUG ******/
+//const item_   = ref<Marca>(null)
+
+//console.log('store.idEditar', store.idEditar)
+if (store.esEditar) {
+  store.item = store.items.find(x => x.id === store.idEditar); }
+else {
+  store.item = {id: 0, nombre: ''}; } //{ ...store.item };
 
 const onSubmit = async () => {
-  alert('onSubmit')
+  try {
+    if (store.esEditar) {
+      store.updItem(store.idEditar, store.item); }
+    else {
+      store.addItem(store.item); }    
+  }
+  catch (error) { alert('Error: ', error.message); }  
+  finally { goBack() }
 }
 
 const goBack = () => {  
   router.back()
 }
+
+/****** DEBUG ******/
+const itemx    = {id: 1, nombre: 'Marca 1'}
+/****** DEBUG ******/
 
 /*
 import { ref } from 'vue';

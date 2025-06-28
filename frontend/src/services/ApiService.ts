@@ -1,5 +1,4 @@
-//import type { Marca }   from '@/types/marca'
-import { api }          from '@/plugins/axios'
+import { api } from '@/plugins/axios'
 
 export default {
     //async getAllItems(): Promise<Item[]> {
@@ -8,6 +7,7 @@ export default {
     //},
     async getItemAll(url:string) {
         try { const response = await api.get(url);
+            //console.log('Api getItemAll: ', response.data)
             return response.data;
         }
         catch (error) { return error; }
@@ -21,6 +21,7 @@ export default {
     },
 
     async addItem(url:string, data:any) {
+        //console.log('Api addItem: ', url)
         try { const response = await api.post(url, data);
             return response.data;
         }

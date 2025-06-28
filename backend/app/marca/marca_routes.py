@@ -8,6 +8,7 @@ def get_all_marcas():
     data = Marca.get_all()
     try:
         if data:
+            print('data marcas oka')
             return jsonify(data), 200
         else:
             return jsonify({"message": "Marca: no se encontraron datos"}), 204

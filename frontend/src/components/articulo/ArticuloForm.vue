@@ -1,32 +1,32 @@
 <template>
   <form @submit.prevent="onSubmit" class="form">
-    <h2>{{ isEdit.value ? 'editar Artículo' : 'crear Artículo' }}</h2>
+    <h2>{{ store.esEditar ? 'editar Artículo' : 'crear Artículo' }}</h2>
 
     <label for="descripcion">Descripcion:</label><br>
-    <input v-model="item.descripcion" placeholder="Ingrese una descripción" class="input" type="text"required autofocus/><br>
+    <input v-model="store.item.descripcion" placeholder="Ingrese una descripción" class="input" type="text"required autofocus/><br>
 
     <label for="precio">Precio:</label><br>
-    <input v-model="item.precio" placeholder="Indique el precio" class="input" type="number" min="0"/><br>
+    <input v-model="store.item.precio" placeholder="Indique el precio" class="input" type="number" min="0"/><br>
 
     <label for="stock">Stock:</label><br>
-    <input v-model="item.stock" placeholder="Ingrese el stock disponible" class="input" type="number" min="0"/><br>
+    <input v-model="store.item.stock" placeholder="Ingrese el stock disponible" class="input" type="number" min="0"/><br>
 
     <label for="marca">Marcas:</label><br>
-    <select v-model.number="item.marca_id" class="input" min="0">
+    <select v-model.number="store.item.marca_id" class="input" min="0">
       <option disabled value="0">Seleccione Marca</option>
-      <option v-for="m in marcas" :key="m.id" :value="m.id">{{ m.nombre }}</option>
+      <option v-for="x in storeM.items" :key="x.id" :value="x.id">{{ x.nombre }}</option>
     </select><br>
 
 	<label for="proveedor">Proveedores:</label><br>
-    <select v-model.number="item.proveedor_id" class="input">
+    <select v-model.number="store.item.proveedor_id" class="input">
       <option disabled value="0">Seleccione Proveedor</option>
-      <option v-for="p in proveedores" :key="p.id" :value="p.id">{{ p.nombre }}</option>
+      <option v-for="x in storeP.items" :key="x.id" :value="x.id">{{ x.nombre }}</option>
     </select><br>
 
     <label for="categoria">Categorias: (ctrl + clic = mas de 1)</label><br>
-    <select v-model="item.categorias" multiple>
+    <select v-model="store.item.categorias" multiple>
     	<option disabled value="0">Seleccione Categoria(s)</option>
-    	<option v-for="c in categorias" :key="c.id" :value="c.id">{{ c.nombre }}</option>
+    	<option v-for="x in storeC.items" :key="x.id" :value="x.id">{{ x.nombre }}</option>
     </select><br>  	
 
     <button type="submit" class="boton">Confirmar</button>
@@ -36,29 +36,56 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed }  	from 'vue'
+import { ref, computed, onMounted } from 'vue';
 import { storeToRefs }    	from 'pinia'
+import { useRouter } 		    from 'vue-router'
 import { useArticuloStore } from '@/stores/articuloStore'
-import { useRouter } 		from 'vue-router'
 
-const router = useRouter();
-const isEdit = ref(false)
+import { useMarcaStore }      from '@/stores/marcaStore';
+import { useProveedorStore }  from '@/stores/proveedorStore'
+import { useCategoriaStore }  from '@/stores/categoriaStore';
 
-/****** DEBUG ******/
-const item = {id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13, marca_id: 2, proveedor_id: 1, categorias: []}
+const router  = useRouter();
+const store   = useArticuloStore()
+const { items, item, esEditar, idEditar } = storeToRefs(store)
+const { addItem, updItem }                = store
 
-const marcas 		= [{id: 1, nombre: 'Marca 1'}, {id: 2, nombre: 'Marca 2'}]
-const proveedores 	= [{id: 1, nombre: 'Proveedor 1'}, {id: 2, nombre: 'Proveedor 2'}]
-const categorias 	= [{id: 1, nombre: 'Categoria 1'}, {id: 2, nombre: 'Categoria 2'}]
-/****** DEBUG ******/
+const storeM   = useMarcaStore()
+const storeP   = useProveedorStore()
+const storeC   = useCategoriaStore()
+/*
+const { getItemAll }  = storeM
+const { getItemAll }  = storeP
+const { getItemAll }  = storeC
+*/
+
+if (store.esEditar) {
+  store.item = store.items.find(x => x.id === store.idEditar); }
+else {
+  store.item = {id: 0, descripcion: '', precio: 0, stock: 0, marca_id: 0, proveedor_id: 0, categorias: []}; } //{ ...store.item };
 
 const onSubmit = async () => {
-	alert('onSubmit')
+  console.log('articulo :', store.idEditar, store.item)
+  if (!confirm('Confirme por favor')) return;
+  try {
+    if (store.esEditar) {
+      store.updItem(store.idEditar, store.item); }
+    else {
+      store.addItem(store.item); }    
+  }
+  catch (error) { alert('Error: ', error.message); }  
+  finally { goBack() }
 }
 
-const goBack = () => {
+const goBack = () => {  
   router.back()
 }
+
+onMounted(() => {
+  storeM.getItemAll();
+  storeP.getItemAll();
+  storeC.getItemAll();
+});
 </script>
 
 <style scoped>

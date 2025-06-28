@@ -1,18 +1,18 @@
 <template>
   <form @submit.prevent="onSubmit" class="form">
-    <h2>{{ isEdit.value ? 'editar Proveedor' : 'crear Proveedor' }}</h2>
+    <h2>{{ store.esEditar ? 'editar Proveedor' : 'crear Proveedor' }}</h2>
 
     <label for="nombre">Razon Social:</label><br>
-    <input v-model="item.nombre" placeholder="Ingrese un nombre" class="input" type="text"required autofocus/><br>    
+    <input v-model="store.item.nombre" placeholder="Ingrese un nombre" class="input" type="text"required autofocus/><br>    
 
     <label for="direccion">Direccion:</label><br>
-    <input v-model="item.direccion" placeholder="Indique una direccion" class="input" type="text" required/><br>
+    <input v-model="store.item.direccion" placeholder="Indique una direccion" class="input" type="text" required/><br>
 
     <label for="email">Correo electronico:</label><br>
-    <input v-model="item.email" placeholder="Ingrese un email" class="input" type="email"required/><br>
+    <input v-model="store.item.email" placeholder="Ingrese un email" class="input" type="email"required/><br>
 
     <label for="telefono">Telefono(s):</label><br>
-    <input v-model="item.telefono" placeholder="Indique telefono(s) contacto" class="input" type="tel" required/><br>
+    <input v-model="store.item.telefono" placeholder="Indique telefono(s) contacto" class="input" type="tel" required/><br>
 
     <button type="submit" class="boton">Confirmar</button>
     <button type="reset" class="boton">Limpiar</button>
@@ -23,18 +23,28 @@
 <script setup lang="ts">
 import { ref, computed }  		from 'vue'
 import { storeToRefs }    		from 'pinia'
-import { useProveedorStore }  	from '@/stores/proveedorStore'
-import { useRouter } 			from 'vue-router'
+import { useRouter } 			    from 'vue-router'
+import { useProveedorStore }  from '@/stores/proveedorStore'
 
-const router = useRouter();
-const isEdit = ref(false)
+const router  = useRouter();
+const store   = useProveedorStore()
+const { items, item, esEditar, idEditar } = storeToRefs(store)
+const { addItem, updItem }                = store
 
-/****** DEBUG ******/
-const item = {id: 1, nombre: 'HP S.A.', direccion: 'Av. Alcorta 3175', email: 'hpargentina@hp.com', telefono: '01121571329'}
-/****** DEBUG ******/
+if (store.esEditar) {
+  store.item = store.items.find(x => x.id === store.idEditar); }
+else {
+  store.item = {id: 0, nombre: '', direccion: '', email: '', telefono: ''}; } //{ ...store.item };
 
 const onSubmit = async () => {
-	alert('onSubmit')
+  try {
+    if (store.esEditar) {
+      store.updItem(store.idEditar, store.item); }
+    else {
+      store.addItem(store.item); }    
+  }
+  catch (error) { alert('Error: ', error.message); }  
+  finally { goBack() }
 }
 
 const goBack = () => {  

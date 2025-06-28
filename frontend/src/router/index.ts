@@ -15,7 +15,7 @@ import categoria_routes   from './categoria_routes'
 import proveedor_routes   from './proveedor_routes'
 */
 const routes = [
-    { path: '/',              name: 'home',         component: DashboardView },    
+//  { path: '/',              name: 'home',         component: DashboardView },    
     { path: '/marcas',        name: 'marcas',       component: MarcaView },
     { path: '/categorias',    name: 'categorias',   component: CategoriaView },
     { path: '/articulos',     name: 'articulos',    component: ArticuloView },

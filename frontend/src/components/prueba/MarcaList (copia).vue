@@ -14,12 +14,7 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <p id="ite_id">.</p>
-        <p id="ite_des">.</p>
-        <p id="ite_pre">.</p>
-        <p id="ite_sto">.</p>
-        <p id="ite_mar">.</p>
-        <p id="ite_pro">.</p>
-        <p id="ite_cat">.</p>
+        <p id="ite_nom">.</p>
       </div>
     </div>
 
@@ -28,19 +23,15 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
+            <th>Nombre</th>
             <th class="actions-header">opciones</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="item in store.items" :key="item.id">
+          <tr v-for="item in items" :key="item.id">
             <td>{{ item.id }}</td>
-            <td>{{ item.descripcion }}</td>
-            <td>{{ $filters.formatNumberWithCommas(item.precio, 20) }}</td>            
-            <td>{{ item.stock }}</td>
+            <td>{{ item.nombre }}</td>
             <td class="action-icons">
               <button @click="itemEditar(item.id)" title="Editar">
                 <Icon icon="tabler:edit" />
@@ -53,10 +44,7 @@
               </button>
             </td>
           </tr>
-          <tr v-if="store.esLoad">
-            <td colspan="3" class="no-data">Leyendo registros .. aguarde</td>
-          </tr>          
-          <tr v-if="store.items.length === 0">
+          <tr v-if="items.length === 0">
             <td colspan="3" class="no-data">No hay registros para mostrar.</td>
           </tr>
         </tbody>
@@ -66,32 +54,49 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted }   from 'vue';
-import { Icon }             from '@iconify/vue';
-import { storeToRefs }      from 'pinia'
-import { useRouter }        from 'vue-router';  //, useRoute
-import { useArticuloStore } from '@/stores/articuloStore'
+import { ref, onMounted } from 'vue';
+import { Icon }           from '@iconify/vue';
+import { storeToRefs }    from 'pinia'
+import { useRouter }      from 'vue-router';  //, useRoute
+import { useMarcaStore }  from '@/stores/marcaStore'
 
-const error   = ref<string | null>(null);
 const modal   = ref(null)
 const span    = ref(null)
 const router  = useRouter();  //router check //const route = useRoute(); Access current route
-const store   = useArticuloStore()
-const { items, esEditar, idEditar }             = storeToRefs(store)
-const { esLoad, esError, getItemAll, delItem }  = store
+const store   = useMarcaStore()
+const { esEditar, idEditar }  = storeToRefs(store)
+const { esLoad, esError, getItemAll, delItem } = store
+//const { esLoad, esError, getItemAll, getItemId, addItem, updItem, delItem } = store
+// You need storeToRefs when destructuring, properties created with `ref` or `computed`
+// But you don't need it when destructuring methods
+
+
+//const items   = ref<Marca[]>([]);
+//const loading = ref(false);
+const error   = ref<string | null>(null);
+const newItem = ref<Omit<Marca, 'id'>>( { nombre: '', email: '' } );
+const ediItem = ref<Marca | null>(null);
 
 // --- Funciones para los botones ---
 
 const itemAgregar = () => {
   store.esEditar  = false 
   store.idEditar  = 0
-  router.push( {name: 'articulo_create'} );
+  //router.push( {name: 'marca_create'} );
+  router.push( {name: 'marca_create'} );
+/*router.push({name: 'categoria_create'});
+  router.push( {name: 'proveedor_create'} ); */
+
+  //alert(router.currentRoute.value.name)
+  //alert(router.options.routes)
+  //console.log('Current route:', route.value);   
 };
 
 const itemEditar = (id:number) => {
   store.esEditar  = true
   store.idEditar  = id
-  router.push( {name: 'articulo_edit', params: {id: id}} )  
+  router.push( {name: 'marca_edit', params: {id: id}} )
+  //console.log(`Editando artículo con ID: ${id}`);
 };
 
 const itemEliminar = (id?:number) => {
@@ -103,6 +108,14 @@ const itemEliminar = (id?:number) => {
   }
 };
 
+/*
+const eliminarItem = (id:number) => {
+  console.log(`Eliminando artículo con ID: ${id}`);
+  // Lógica de ejemplo para borrarlo de la lista
+  // items.value = items.value.filter(a => a.id !== id);
+};
+*/
+
 const itemDetalle = (id:number) => {
   //console.log(items.value[0]);
   //console.log(typeof items.value)
@@ -112,26 +125,22 @@ const itemDetalle = (id:number) => {
   if (itemTmp) {
     let tmp1 = document.getElementById("ite_id");
     tmp1.innerHTML = 'ID: '+ id;
-    let tmp2 = document.getElementById("ite_des");
+    let tmp2 = document.getElementById("ite_nom");
     tmp2.innerHTML = itemTmp[0].descripcion;
-    let tmp3 = document.getElementById("ite_pre");
-    tmp3.innerHTML = 'precio: '+ itemTmp[0].precio;
-    let tmp4 = document.getElementById("ite_sto");
-    tmp4.innerHTML = 'stock: '+ itemTmp[0].stock;
-    let tmp5 = document.getElementById("ite_mar");
-    tmp5.innerHTML = 'marca: '+ itemTmp[0].marca[0].nombre;
-    let tmp6 = document.getElementById("ite_pro");
-    tmp6.innerHTML = 'pvdor: '+ itemTmp[0].proveedor[0].nombre;
-    let tmp7 = document.getElementById("ite_cat");    
-    tmp7.innerHTML = itemTmp[0].categorias.map(c => c.nombre).join(', ')
   }
   //console.log(`Mostrando artículo con ID: ${id}`);
 };
 
 const setModal = () => {
+  // Modal
   modal.value = document.getElementById("myModal");
-  span.value  = document.getElementsByClassName("close")[0];
+  // Get the button that opens the modal
+  //let btn = document.getElementById("myBtn");
+  // Get the <span> element that closes the modal
+  span.value = document.getElementsByClassName("close")[0];
+  // When the user clicks on <span> (x), close the modal
   span.value.onclick = function() {modal.value.style.display = "none";}
+  // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal.value) {
       modal.value.style.display = "none";
@@ -145,6 +154,54 @@ onMounted(() => {
 
   setModal();
 });
+
+
+
+/****** DEBUG ************************************************************************ */
+// --- Lógica y Datos de Ejemplo ---
+
+// Definimos la estructura de un artículo para mayor claridad con TypeScript
+interface Articulo {
+  id: number;
+  descripcion: string;
+}
+// Datos de ejemplo. En una aplicación real, esto vendría de una API.
+const items = ref<Articulo[]>([
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
+  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
+  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
+  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
+]);
+/****** DEBUG ************************************************************************ */
 </script>
 
 <style scoped>

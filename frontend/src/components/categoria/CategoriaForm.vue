@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="onSubmit" class="form">
-    <h2>{{ isEdit.value ? 'editar Categoria' : 'crear Categoria' }}</h2>
+    <h2>{{ store.esEditar ? 'editar Categoria' : 'crear Categoria' }}</h2>
 
     <label for="nombre">Nombre:</label><br>
-    <input v-model="item.nombre" placeholder="Ingrese un nombre" type="text" class="input" required autofocus/>
+    <input v-model="store.item.nombre" placeholder="Ingrese un nombre" type="text" class="input" required autofocus/>
 
     <button type="submit" class="boton">Confirmar</button>
     <button type="reset" class="boton">Limpiar</button>
@@ -12,38 +12,35 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed }  		from 'vue'
-import { storeToRefs }    		from 'pinia'
-import { useCategoriaStore }  	from '@/stores/categoriaStore'
-import { useRouter }      		from 'vue-router'
+import { ref, computed }      from 'vue'
+import { storeToRefs }        from 'pinia'
+import { useRouter }          from 'vue-router'
+import { useCategoriaStore }  from '@/stores/categoriaStore'
 
 const router  = useRouter();
-const isEdit  = ref(false)
+const store   = useCategoriaStore()
+const { items, item, esEditar, idEditar } = storeToRefs(store)
+const { addItem, updItem }                = store
 
-/****** DEBUG ******/
-const item    = {id: 1, nombre: 'Categoria 1'}
-/****** DEBUG ******/
+if (store.esEditar) {
+  store.item = store.items.find(x => x.id === store.idEditar); }
+else {
+  store.item = {id: 0, nombre: ''}; } //{ ...store.item };
 
 const onSubmit = async () => {
-	alert('onSubmit')
+  try {
+    if (store.esEditar) {
+      store.updItem(store.idEditar, store.item); }
+    else {
+      store.addItem(store.item); }    
+  }
+  catch (error) { alert('Error: ', error.message); }  
+  finally { goBack() }
 }
 
 const goBack = () => {  
   router.back()
 }
-
-/*
-import { ref } from 'vue';
-import { useCategoriaStore } from '@/stores/marcaStore';
-
-const store = useCategoriaStore();
-const nombre = ref('');
-
-const onSubmit = async () => {
-  await store.create({ nombre: nombre.value });
-  nombre.value = '';
-};
-*/
 </script>
 
 <style scoped>

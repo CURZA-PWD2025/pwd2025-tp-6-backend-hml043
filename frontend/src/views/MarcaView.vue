@@ -2,15 +2,15 @@
   <main>
     <div class="titulo-contenedor">
       <h1>Marcas</h1>
-      <img alt="Unco logo" class="logo" src="@/assets/icono_marca.svg" width="35" height="35"/>
-      <!-- <Icon icon="tabler:edit" width="30" height="30"/> -->
+      <img alt="Unco logo" class="logo" src="@/assets/ico_marca.svg" width="35" height="35"/>      
     </div>
+
     <MarcaList />
+
   </main>
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
 import MarcaList from '@/components/marca/MarcaList.vue';
 </script>
 

@@ -2,14 +2,16 @@
   <main>    
     <div class="titulo-contenedor">
       <h1>Articulos</h1>
-      <img alt="Unco logo" class="logo" src="@/assets/icono_articulo.svg" width="35" height="35"/>
+      <img alt="Unco logo" class="logo" src="@/assets/ico_articulo.svg" width="35" height="35"/>
     </div>
-    <MarcaList />
+
+    <ArticuloList />
+
   </main>
 </template>
 
 <script setup lang="ts">
-  import MarcaList from '@/components/marca/MarcaList.vue';
+import ArticuloList from '@/components/articulo/ArticuloList.vue';
 </script>
 
 <style scoped>

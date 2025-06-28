@@ -24,16 +24,16 @@
       <header class="top-navbar">
         <button class="auth-button">Login</button>
       </header>
-
       <div class="content-area">
+
         <router-view />
+
       </div>
     </main>
   </div>
 </template>
 
 <script setup>
-//import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <style scoped>

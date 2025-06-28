@@ -2,7 +2,7 @@
   <main>
   	<div class="titulo-contenedor">
     	<h1>Configuracion</h1>
-    	<img alt="Unco logo" class="logo" src="@/assets/icono_configuracion.svg" width="35" height="35"/>
+    	<img alt="Unco logo" class="logo" src="@/assets/ico_configuracion.svg" width="35" height="35"/>
     </div>
     <br><br><br><br>    
     <h2>En construccion ...</h2>

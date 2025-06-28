@@ -3,7 +3,7 @@
     
     <header class="list-header">
       <h2>Listado actualizado</h2>
-      <button class="add-button" @click="agregarItem">
+      <button class="add-button" @click="itemAgregar">
         <Icon icon="tabler:circle-plus" class="add-icon" />
         <span>Agregar</span>
       </button>
@@ -13,10 +13,8 @@
     <div id="myModal" class="modal">      
       <div class="modal-content">
         <span class="close">&times;</span>
-        <p id="art_id">.</p>
-        <p id="art_des">.</p>
-        <p id="art_pre">.</p>
-        <p id="art_sto">.</p>
+        <p id="ite_id">.</p>
+        <p id="ite_nom">.</p>
       </div>
     </div>
 
@@ -25,32 +23,28 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
+            <th>Nombre</th>
             <th class="actions-header">opciones</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="item in items" :key="item.id">
+          <tr v-for="item in store.items" :key="item.id">
             <td>{{ item.id }}</td>
-            <td>{{ item.descripcion }}</td>
-            <td>{{ $filters.formatNumberWithCommas(item.precio, 20) }}</td>            
-            <td>{{ item.stock }}</td>
+            <td>{{ item.nombre }}</td>
             <td class="action-icons">
-              <button @click="editarItem(item.id)" title="Editar">
+              <button @click="itemEditar(item.id)" title="Editar">
                 <Icon icon="tabler:edit" />
               </button>
-              <button @click="detalleItem(item.id)" title="Ver detalle">
+              <button @click="itemDetalle(item.id)" title="Ver detalle">
                 <Icon icon="mdi:magnify-plus-outline" />
               </button>
-              <button @click="eliminarItem(item.id)" title="Eliminar">
+              <button @click="itemEliminar(item.id)" title="Eliminar">
                 <Icon icon="tabler:trash" />
               </button>
             </td>
           </tr>
-          <tr v-if="items.length === 0">
+          <tr v-if="store.items.length === 0">
             <td colspan="3" class="no-data">No hay registros para mostrar.</td>
           </tr>
         </tbody>
@@ -66,91 +60,57 @@ import { storeToRefs }    from 'pinia'
 import { useRouter }      from 'vue-router';  //, useRoute
 import { useMarcaStore }  from '@/stores/marcaStore'
 
-const router  = useRouter();  //router check //const route = useRoute(); Access current route
-const store   = useMarcaStore()
-const { esEditar, idEditar }  = storeToRefs(store)
-const { esLoading, esError, getItemAll, delItem } = store
-//const { esLoading, esError, getItemAll, getItemId, addItem, updItem, delItem } = store
-// You need storeToRefs when destructuring, properties created with `ref` or `computed`
-// But you don't need it when destructuring methods
+const error   = ref<string | null>(null);
 const modal   = ref(null)
 const span    = ref(null)
-
-
-//const items   = ref<Marca[]>([]);
-//const loading = ref(false);
-const error   = ref<string | null>(null);
-const newItem = ref<Omit<Marca, 'id'>>( { nombre: '', email: '' } );
-const ediItem = ref<Marca | null>(null);
+const router  = useRouter();
+const store   = useMarcaStore()
+const { items, esEditar, idEditar }             = storeToRefs(store)
+const { esLoad, esError, getItemAll, delItem }  = store
 
 // --- Funciones para los botones ---
 
-const agregarItem = () => {
+const itemAgregar = () => {  
   store.esEditar  = false 
   store.idEditar  = 0
-  //router.push( {name: 'marca_create'} );
-  router.push({name: 'articulo_create'});
-/*router.push({name: 'categoria_create'});
-  router.push( {name: 'proveedor_create'} ); */
-
-  //alert(router.currentRoute.value.name)
-  //alert(router.options.routes)
-  //console.log('Current route:', route.value);   
+  router.push( {name: 'marca_create'} );
 };
 
-const editarItem = (id:number) => {
+const itemEditar = (id:number) => {
   store.esEditar  = true
   store.idEditar  = id
   router.push( {name: 'marca_edit', params: {id: id}} )
   //console.log(`Editando artículo con ID: ${id}`);
 };
 
-const eliminarItem = (id?:number) => {
+const itemEliminar = (id?:number) => {
   if (!id) return;
   error.value = null;
   if (confirm(`Eliminar el registro con ID ${id} ?`)) {
-    try { store.delItem(id); console.log(`Registro con ID ${id} eliminado`); }  //await loadUsers(); // Refrescar la lista    
+    try { store.delItem(id); console.log(`Registro con ID ${id} eliminado`); }
     catch (err: any) {error.value = err.message || 'Falló al eliminar el registro';}
   }
 };
 
-/*
-const eliminarItem = (id:number) => {
-  console.log(`Eliminando artículo con ID: ${id}`);
-  // Lógica de ejemplo para borrarlo de la lista
-  // items.value = items.value.filter(a => a.id !== id);
-};
-*/
-
-const detalleItem = (id:number) => {
+const itemDetalle = (id:number) => {  
   //console.log(items.value[0]);
   //console.log(typeof items.value)
   modal.value.style.display = "block";
   let itemTmp = items.value.filter(a => a.id === id);
   console.log(itemTmp[0])
   if (itemTmp) {
-    let tmp1 = document.getElementById("art_id");
+    let tmp1 = document.getElementById("ite_id");
     tmp1.innerHTML = 'ID: '+ id;
-    let tmp2 = document.getElementById("art_des");
-    tmp2.innerHTML = itemTmp[0].descripcion;
-    let tmp3 = document.getElementById("art_pre");
-    tmp3.innerHTML = 'Precio: '+ itemTmp[0].precio;
-    let tmp4 = document.getElementById("art_sto");
-    tmp4.innerHTML = 'Stock: '+ itemTmp[0].stock;
+    let tmp2 = document.getElementById("ite_nom");
+    tmp2.innerHTML = itemTmp[0].nombre;
   }
   //console.log(`Mostrando artículo con ID: ${id}`);
 };
 
 const setModal = () => {
-  // Modal
   modal.value = document.getElementById("myModal");
-  // Get the button that opens the modal
-  //let btn = document.getElementById("myBtn");
-  // Get the <span> element that closes the modal
   span.value = document.getElementsByClassName("close")[0];
-  // When the user clicks on <span> (x), close the modal
   span.value.onclick = function() {modal.value.style.display = "none";}
-  // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
     if (event.target == modal.value) {
       modal.value.style.display = "none";
@@ -164,54 +124,6 @@ onMounted(() => {
 
   setModal();
 });
-
-
-
-/****** DEBUG ************************************************************************ */
-// --- Lógica y Datos de Ejemplo ---
-
-// Definimos la estructura de un artículo para mayor claridad con TypeScript
-interface Articulo {
-  id: number;
-  descripcion: string;
-}
-// Datos de ejemplo. En una aplicación real, esto vendría de una API.
-const items = ref<Articulo[]>([
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-  { id: 101, descripcion: 'Teclado Mecánico RGB', precio: 125000.00, stock: 13 },
-  { id: 102, descripcion: 'Mouse Inalámbrico Ergonómico', precio: 35000.00, stock: 7 },
-  { id: 103, descripcion: 'Monitor Ultrawide 34"', precio: 450000.00, stock: 25 },
-  { id: 104, descripcion: 'Webcam 4K con Micrófono', precio: 57000.00, stock: 0 },
-]);
-/****** DEBUG ************************************************************************ */
 </script>
 
 <style scoped>
